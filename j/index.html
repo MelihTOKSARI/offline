@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join a friend on Stay Offline</title>
+<meta name="description" content="A friend invited you to Stay Offline — real hobbies, guilt-free streaks, and a journey of your offline life.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#FAF6EF;--surface:#FFFFFF;--ink:#2B2620;--muted:#6B6356;--primary:#2D5A3D;--accent:#C96F4A;--gold:#D9A441;--border:#E4DBCD;--on:#FFFDF8;}
+  @media (prefers-color-scheme: dark){:root{--bg:#171B16;--surface:#22281F;--ink:#F2EDE3;--muted:#A79E90;--primary:#8FBF95;--accent:#E0946A;--gold:#E5B45E;--border:#343B30;--on:#14180F;}}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:'Nunito Sans',system-ui,sans-serif;line-height:1.6}
+  .wrap{max-width:560px;margin:0 auto;padding:48px 20px;text-align:center}
+  h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:2rem;line-height:1.2;margin:24px 0 12px}
+  .brand{font-family:Fraunces,Georgia,serif;color:var(--primary);font-size:1.3rem;display:block}
+  .lead{font-size:1.1rem;color:var(--muted)}
+  a.btn{display:inline-block;background:var(--primary);color:var(--on);padding:15px 32px;border-radius:14px;font-weight:700;font-size:1.05rem;text-decoration:none;margin-top:28px}
+  a.store{display:inline-block;color:var(--primary);font-weight:700;text-decoration:none;margin-top:20px}
+  .hint{margin-top:32px;font-size:.9rem;color:var(--muted)}
+  .code{font-family:ui-monospace,Menlo,monospace;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:2px 8px}
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--border);font-size:.9rem;color:var(--muted)}
+  footer a{color:var(--primary);text-decoration:none;margin:0 9px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="brand">offline</span>
+  <h1>A friend wants you<br>on Stay Offline</h1>
+  <p class="lead">Real hobbies, guilt-free streaks, and gentle nudges — better together.</p>
+
+  <a class="btn" id="open" href="#">Open in Stay Offline</a>
+  <br>
+  <!-- TODO: replace # with the App Store link once the app is live (apps.apple.com/app/idXXXXXXXXX) -->
+  <a class="store" id="get" href="#">Don't have the app? Get it on the App Store</a>
+
+  <p class="hint" id="hint" hidden>Your invite code is <span class="code" id="codeout"></span> — open Stay Offline and it will be applied automatically.</p>
+
+  <footer>
+    <a href="../">About</a>
+    <a href="../privacy/">Privacy</a>
+    <a href="../support/">Support</a>
+  </footer>
+</div>
+<script>
+  var code = new URLSearchParams(location.search).get('c') || '';
+  code = code.replace(/[^A-Za-z0-9]/g, '');
+  var appUrl = 'offline://invite/' + code;
+  var open = document.getElementById('open');
+  if (code) {
+    open.href = appUrl;
+    document.getElementById('codeout').textContent = code;
+    document.getElementById('hint').hidden = false;
+    // Best-effort auto-open; if the app isn't installed this is a silent no-op
+    // and the visitor uses the App Store link instead.
+    setTimeout(function () { location.href = appUrl; }, 400);
+  } else {
+    open.textContent = 'Open Stay Offline';
+    open.href = 'offline://';
+  }
+</script>
+</body>
+</html>
