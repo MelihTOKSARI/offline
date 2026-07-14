@@ -10,6 +10,7 @@ site/
 ├── privacy/index.html  → https://melihtoksari.github.io/offline/privacy   (Privacy Policy URL)
 ├── terms/index.html    → https://melihtoksari.github.io/offline/terms     (Terms of Use)
 ├── support/index.html  → https://melihtoksari.github.io/offline/support   (Support URL)
+├── j/index.html        → https://melihtoksari.github.io/offline/j/?c=CODE (friend-invite landing, deep-links to offline://invite/CODE)
 └── .nojekyll           (serve files as-is)
 ```
 
